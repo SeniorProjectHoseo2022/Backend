@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <form action="account/login" style="border: solid black;" method="post">
+        <p>login</p>
+        id : <input type="text" name="id" id="id"><br>
+        pw : <input type="password" name="pw" id="pw"><br>
+        <button>Submit</button>
+    </form>
+
+    <form action="account/sign" style="border: solid black;" method="post">
+        <p>sign</p>
+        id : <input type="text" name="id" id="id"><br>
+        pw : <input type="password" name="password" id="pw"><br>
+        phone : <input type="text" name="phone" id="phone"><br>
+        <button>Submit</button>
+    </form>
+
+    <form action="account/id_check" style="border: solid black;" method="post">
+        <p>id check</p>
+        id : <input type="text" name="id" id="id"><br>
+        <button>Submit</button>
+    </form>
+
+    <form action="account/change" style="border: solid black;" method="post">
+        <p>change</p>
+        uid : <input type="text" name="uid" id="uid"><br>
+        id : <input type="text" name="id" id="id"><br>
+        pw : <input type="password" name="password" id="password"><br>
+        phone : <input type="text" name="phone" id="phone"><br>
+        <button>Submit</button>
+    </form>
+
+
+    <form action="account/withdrawal" style="border: solid black;" method="post">
+        <p>withdrawal</p>
+        id : <input type="text" name="id" id="id"><br>
+        pw : <input type="password" name="password" id="password"><br>
+        <button>Submit</button>
+    </form>
+
+    <form action="account/info" style="border: solid black;" method="post">
+        <p>userinfo</p>
+        uid : <input type="text" name="uid" id="uid"><br>
+        <button>Submit</button>
+     </form>
+
+     <form action="account/select" style="border: solid black;" method="post">
+         <p>user select</p>
+         uid : <input type="text" name="uid" id="uid"><br>
+         <button>Submit</button>
+     </form>
+</body>
+
+
+</html>
