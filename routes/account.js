@@ -18,7 +18,7 @@ router.post('/login', function (req, res) {
         db.run(sql.login, [id, pw], function (err, data) {
             if (data[0] != undefined) {res.json(token.lgToken(data[0]["uid"]))
             }
-            else res.json({message: "200", data: "404"})
+            else res.json({message: "404"})
         });
     } catch (e) {
         res.json({message: "500"})
