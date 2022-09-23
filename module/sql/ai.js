@@ -1,5 +1,5 @@
 function update() {
-    return "select ai($0,$1,$2,$3) as qid"
+    return "select ai($0,$1,$2) as qid"
 }
 
 function url_check(){
