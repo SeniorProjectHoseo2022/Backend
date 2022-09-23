@@ -8,11 +8,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/response', function (req,res){
     try {
-        const uid = req.body.uid;
+        const pid = req.body.pid;
         const _confirm = req.body._confirm;
         const message = req.body.message;
-        const pid = req.body.pid;
-        db.run(sql.upload,[uid, _confirm, message, pid],function (err,data){
+        db.run(sql.upload,[pid, _confirm, message],function (err,data){
             if(data[0]!=undefined)  res.json({message:"200", data:data[0]})
             else res.json({message:"200", data:"404"})
         });

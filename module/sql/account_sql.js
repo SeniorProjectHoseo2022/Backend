@@ -4,7 +4,7 @@ function login(){
 }
 
 function sign(){
-    return "INSERT INTO senior.account (id, pw, phone) VALUES ($0, $1,$2)"
+    return "INSERT INTO senior.account (id, pw, pid) VALUES ($0, $1,$2)"
 }
 
 function id_check(){
