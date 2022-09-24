@@ -30,7 +30,7 @@ router.post('/sign', function (req, res) {
         const id = req.body.id;
         const pw = req.body.pw;
         const phone = req.body.phone;
-        db.run(sql.sign, [id, pw, phone], function (err, data) {
+        db.run(sql.sign, [id, pw], function (err, data) {
             if (err == null)
                 res.json({message: "200"})
             else
@@ -38,6 +38,18 @@ router.post('/sign', function (req, res) {
         });
     } catch (e) {
         res.json({message: "400"})
+    }
+})
+
+router.post('/pnum_update', function (req,res){
+    try {
+        const pnum = req.body.pnum;
+        db.run(sql.pnum_update,[pnum],function (err,data){
+            if(data[0]!=undefined)  res.json({message:"200", data:data[0]})
+            else res.json({message:"200", data:"404"})
+        });
+    }catch (e){
+        res.json({message:"500"})
     }
 })
 
