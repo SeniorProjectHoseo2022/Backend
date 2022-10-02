@@ -16,9 +16,9 @@ router.post('/login', function (req, res) {
         const id = req.body.id;
         const pw = req.body.pw;
         db.run(sql.login, [id, pw], function (err, data) {
-            if (data[0] != undefined) {res.json(token.lgToken(data[0]["uid"]))
-            }
-            else res.json({message: "404"})
+            if (data[0] != undefined) {
+                res.json(token.lgToken(data[0]["uid"]))
+            } else res.json({message: "404"})
         });
     } catch (e) {
         res.json({message: "500"})
@@ -29,27 +29,30 @@ router.post('/sign', function (req, res) {
     try {
         const id = req.body.id;
         const pw = req.body.pw;
-        const phone = req.body.phone;
-        db.run(sql.sign, [id, pw], function (err, data) {
-            if (err == null)
-                res.json({message: "200"})
-            else
-                res.json({message: "500", errno: err.errno})
+        const pid = req.body.pid;
+
+        db.run(sql.pnum_update, [pid], function (err, data) {
+            if (err == null) {
+                db.run(sql.sign, [id, pw, data[0].pid], function (err2, data2) {
+                    if (err2 == null) res.json({message: "200"})
+                    else res.json({message: "500", errno: err2.errno})
+                });
+            } else res.json({message: "500"})
         });
     } catch (e) {
         res.json({message: "400"})
     }
 })
 
-router.post('/pnum_update', function (req,res){
+router.post('/pnum_update', function (req, res) {
     try {
-        const pnum = req.body.pnum;
-        db.run(sql.pnum_update,[pnum],function (err,data){
-            if(data[0]!=undefined)  res.json({message:"200", data:data[0]})
-            else res.json({message:"200", data:"404"})
+        const pid = req.body.pid;
+        db.run(sql.pnum_update, [pid], function (err, data) {
+            if (data[0] != undefined) res.json({message: "200", data: data[0]})
+            else res.json({message: "200", data: "404"})
         });
-    }catch (e){
-        res.json({message:"500"})
+    } catch (e) {
+        res.json({message: "500"})
     }
 })
 
@@ -71,18 +74,27 @@ router.post('/change', function (req, res) {
         const uid = req.body.uid;
         const id = req.body.id;
         const pw = req.body.pw;
-        const phone = req.body.phone;
+        const pid = req.body.pid;
         db.run(sql.info_check, [uid], function (err, data) {
             if (data[0] != undefined) {
-                db.run(sql.change, [uid, id, pw, phone], function (err2, data2) {
-                    if (err2 == null) res.json({message: "200"})
-                    else res.json({message: "500", errno: err2.errno})
+                db.run(sql.pnum_update, [pid], function (err2, data2) {
+                    if (err2 == null) {
+                        db.run(sql.change, [uid, id, pw, data2[0].pid], function (err3, data3) {
+                            if (err3 == null) res.json({message: "200"})
+                            else res.json({message: "500", errno: err3.errno})
+                        })
+                    } else {
+                        res.json({message: "400"})
+                    }
                 })
-            } else res.json({message: "500"})
-        });
+            } else {
+                res.json({message: "500"})
+            }
+        })
     } catch (e) {
         res.json({message: "500"})
     }
+
 })
 
 router.post('/withdrawal', function (req, res) {
@@ -119,14 +131,13 @@ router.post('/verify', verifyToken, function (req, res) {
 })
 
 
-router.post('/refresh', function (req,res){
+router.post('/refresh', function (req, res) {
     const rft = req.body.rft;
     db.run(sql.refreshck, [rft], function (err, data) {
         if (data[0] != undefined) {
-            const decrypt= decryption(data[0]["refresh"]);
+            const decrypt = decryption(data[0]["refresh"]);
             res.json(token.lgToken(data[0][decrypt.uid]));
-        }
-        else res.json({message: "NO TOKEN", data: "404"})
+        } else res.json({message: "NO TOKEN", data: "404"})
     });
 
 })
