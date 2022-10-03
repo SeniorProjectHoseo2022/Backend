@@ -21,6 +21,17 @@ router.post('/text_response', function (req, res) {
     }
 })
 
+router.post('/recent_list', function (req, res) {
+    try {
+        db.run(sql.recent_list,"", function (err, data) {
+            if (data != undefined) res.json({message: "200", text : data})
+            else res.json({message: "200", data: "404"})
+        })
+    } catch (e) {
+        res.json({message: "500"})
+    }
+})
+
 router.post('/report_num', function (req,res){
     try {
         const uid=req.body.uid;

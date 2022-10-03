@@ -9,7 +9,11 @@ function p_update() {
 function text_response(){
     return "SELECT textresponse($0) as text"
 }
+function recent_list(){
+    return "SELECT * FROM recent_list"
+}
 
 module.exports.report_num = report_num();
 module.exports.pnum_update = p_update();
 module.exports.text_response = text_response();
+module.exports.recent_list=recent_list();
