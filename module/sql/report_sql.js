@@ -7,7 +7,7 @@ function p_update() {
 }
 
 function text_response(){
-    return "SELECT textresponse($0) as text"
+    return "SELECT text FROM senior.report AS a JOIN phone as b ON a.pid=b.pid WHERE b.num=$0"
 }
 function recent_list(){
     return "SELECT * FROM recent_list"

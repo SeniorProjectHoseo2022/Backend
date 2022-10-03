@@ -3,6 +3,7 @@ const router = express.Router()
 const sql = require('../module/sql/report_sql')
 const db = require('../module/database/db_control')
 const token = require("../module/token/token");
+const {verifyToken} = require("../module/token/check");
 
 router.get('/', function(req, res, next) {
     res.render('report', { title: 'Express' });
@@ -10,10 +11,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/text_response', function (req, res) {
     try {
-        const pid = req.body.pid;
+        const pnum = req.body.pnum;
 
-        db.run(sql.text_response, [pid], function (err, data) {
-            if (data[0] != undefined) res.json({message: "200", text : data[0]})
+        db.run(sql.text_response, [pnum], function (err, data) {
+            if (data != undefined) res.json({message: "200", text : data})
             else res.json({message: "200", data: "404"})
         })
     } catch (e) {
@@ -21,7 +22,7 @@ router.post('/text_response', function (req, res) {
     }
 })
 
-router.post('/recent_list', function (req, res) {
+router.get('/recent_list', function (req, res) {
     try {
         db.run(sql.recent_list,"", function (err, data) {
             if (data != undefined) res.json({message: "200", text : data})
@@ -32,9 +33,9 @@ router.post('/recent_list', function (req, res) {
     }
 })
 
-router.post('/report_num', function (req,res){
+router.post('/report_num', verifyToken, function (req,res){
     try {
-        const uid=req.body.uid;
+        const uid=req.decryption.uid;
         const text=req.body.text;
         const pid=req.body.pid;
 
