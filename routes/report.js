@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     res.render('report', { title: 'Express' });
 });
 
-router.post('/text_response', function (req, res) {
+router.get('/text_response', function (req, res) {
     try {
         const pnum = req.body.pnum;
 
@@ -33,7 +33,11 @@ router.get('/recent_list', function (req, res) {
     }
 })
 
+<<<<<<< HEAD
 router.post('/report_num', verifyToken, function (req,res){
+=======
+router.post('/report_num', verifyToken,function (req,res){
+>>>>>>> db3734a0cb519b0f74be46e74316dce9fe65f5fd
     try {
         const uid=req.decryption.uid;
         const text=req.body.text;
