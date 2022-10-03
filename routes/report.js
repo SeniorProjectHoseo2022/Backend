@@ -3,6 +3,7 @@ const router = express.Router()
 const sql = require('../module/sql/report_sql')
 const db = require('../module/database/db_control')
 const token = require("../module/token/token");
+const {verifyToken} = require("../module/token/check");
 
 router.get('/', function(req, res, next) {
     res.render('report', { title: 'Express' });
@@ -32,9 +33,9 @@ router.post('/recent_list', function (req, res) {
     }
 })
 
-router.post('/report_num', function (req,res){
+router.post('/report_num', verifyToken,function (req,res){
     try {
-        const uid=req.body.uid;
+        const uid=req.decryption.uid;
         const text=req.body.text;
         const pid=req.body.pid;
 
