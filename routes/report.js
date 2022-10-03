@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     res.render('report', { title: 'Express' });
 });
 
-router.post('/text_response', function (req, res) {
+router.get('/text_response', function (req, res) {
     try {
         const pid = req.body.pid;
 
@@ -22,7 +22,7 @@ router.post('/text_response', function (req, res) {
     }
 })
 
-router.post('/recent_list', function (req, res) {
+router.get('/recent_list', function (req, res) {
     try {
         db.run(sql.recent_list,"", function (err, data) {
             if (data != undefined) res.json({message: "200", text : data})
