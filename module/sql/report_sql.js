@@ -3,8 +3,13 @@ function report_num(){
 }
 
 function p_update() {
-    return "SELECT pid_update($0) as pid"
+    return "SELECT phone_update($0) as pid"
+}
+
+function text_response(){
+    return "SELECT textresponse($0) as text"
 }
 
 module.exports.report_num = report_num();
 module.exports.pnum_update = p_update();
+module.exports.text_response = text_response();

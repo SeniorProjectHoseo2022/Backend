@@ -2,10 +2,24 @@ const express = require('express')
 const router = express.Router()
 const sql = require('../module/sql/report_sql')
 const db = require('../module/database/db_control')
+const token = require("../module/token/token");
 
 router.get('/', function(req, res, next) {
     res.render('report', { title: 'Express' });
 });
+
+router.post('/text_response', function (req, res) {
+    try {
+        const pid = req.body.pid;
+
+        db.run(sql.text_response, [pid], function (err, data) {
+            if (data[0] != undefined) res.json({message: "200", text : data[0]})
+            else res.json({message: "200", data: "404"})
+        })
+    } catch (e) {
+        res.json({message: "500"})
+    }
+})
 
 router.post('/report_num', function (req,res){
     try {
