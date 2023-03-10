@@ -17,5 +17,5 @@ AI : https://github.com/dev-daru/2022.09-SeniorProject-Ai-python<br>
 ### 시연영상입니다.<br><br>
 [![Video Label](http://img.youtube.com/vi/RctHAG5oD1M/0.jpg)](https://www.youtube.com/watch?v=RctHAG5oD1M)
 
-자세한 내용은 [링크](https://github.com/dev-daru/2022.09-SeniorProject-Backend-node.js/blob/main/%E1%84%8C%E1%85%A9%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%A8%20%E1%84%87%E1%85%A9%E1%84%80%E1%85%A9%E1%84%89%E1%85%A5.pdf)파일을 참고해주시면 감사하겠습니다.
+자세한 내용은 [링크](https://github.com/SeniorProjectHoseo2022/Backend/blob/main/report.pdf)파일을 참고해주시면 감사하겠습니다.
 
